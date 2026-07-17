@@ -146,24 +146,22 @@ class SocoliveCrawler:
             print(f"   – [{idx}] {name}  → không có luồng (chưa live?)")
 
     async def _fetch_with_streamdata(self, page, url):
-        # Cloudflare/anti-bot sometimes serves a stripped challenge page (no
-        # streamData). Reload a few times, waiting for streamData to appear;
-        # the cf_clearance cookie set on the first hit usually lets a reload through.
-        # Returns (html, challenged) — challenged=True means we never got real data.
+        # Returns (html, challenged). Fast path: streamData is in the initial HTML
+        # for live matches, and a real not-live page carries the site's player
+        # assets — so we can tell "not live" from "bot challenge" without waiting.
+        # Only the small stripped challenge page triggers a reload retry.
+        html = ""
         for _ in range(3):
             if not await goto_retry(page, url, tries=2):
                 continue
-            try:
-                await page.wait_for_function(
-                    "() => document.documentElement.innerHTML.includes('window.streamData')",
-                    timeout=10000,
-                )
-                return await page.content(), False
-            except Exception:
-                await asyncio.sleep(2.5)  # challenge page — let it settle, then reload
-        html = await page.content()
-        # if streamData is present after all, not actually challenged
-        return html, "window.streamData" not in html
+            await asyncio.sleep(1.2)
+            html = await page.content()
+            if "window.streamData" in html:
+                return html, False  # live — got the data
+            if "stream-player-plugin" in html or "jwplayer" in html:
+                return html, False  # real page, just not live → don't retry
+            await asyncio.sleep(2.0)  # small challenge page → reload and retry
+        return html, True
 
     @staticmethod
     def _parse_anchors(html):
