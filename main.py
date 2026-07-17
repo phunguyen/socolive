@@ -31,7 +31,17 @@ _CTX = ssl._create_unverified_context() if os.environ.get("SOCOLIVE_INSECURE") =
 
 def fetch(path):
     url = f"{API}/{path}?v={int(time.time() * 1000)}"
-    req = urllib.request.Request(url, headers={"User-Agent": UA, "Referer": REFERER, "Accept": "*/*"})
+    origin = REFERER.rstrip("/")
+    req = urllib.request.Request(url, headers={
+        "User-Agent": UA,
+        "Referer": REFERER,
+        "Origin": origin,
+        "Accept": "*/*",
+        "Accept-Language": "vi-VN,vi;q=0.9,en;q=0.8",
+        "Sec-Fetch-Site": "cross-site",
+        "Sec-Fetch-Mode": "cors",
+        "Sec-Fetch-Dest": "empty",
+    })
     raw = urllib.request.urlopen(req, timeout=30, context=_CTX).read().decode("utf-8", "replace")
     a, b = raw.find("("), raw.rfind(")")  # strip JSONP wrapper: name({...})
     if a != -1 and b > a:
