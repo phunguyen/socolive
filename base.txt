@@ -1,5 +1,0 @@
-# Socolive base URLs — the crawler tries these top to bottom until one loads.
-# When the domain dies, add the new one at the TOP and commit (triggers a run).
-# Lines starting with # are ignored.
-https://socolivef.cv/
-https://socolive16.cv/

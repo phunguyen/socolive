@@ -6,7 +6,7 @@ on:
   workflow_dispatch:         # manual run button
   push:
     branches: [main]
-    paths: [base.txt]        # editing base.txt triggers an immediate run
+    paths: [main.py]         # code changes trigger an immediate run
 
 # allow Pages deploy; one run at a time
 permissions:
@@ -27,22 +27,10 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Cache Playwright browsers
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/ms-playwright
-          key: pw-chromium-${{ runner.os }}
-
-      - name: Install deps
-        run: |
-          pip install playwright
-          playwright install --with-deps chromium
-
+      # No dependencies — main.py is pure stdlib (urllib/json). No browser needed.
       - name: Crawl
         env:
           SOCOLIVE_OUT: public
-          SOCOLIVE_HEADLESS: "1"
-          SOCOLIVE_MAX: "60"
         run: python main.py
 
       - uses: actions/upload-pages-artifact@v3

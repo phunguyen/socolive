@@ -1,71 +1,68 @@
 # socolive-crawler
 
-Cào lịch trận Socolive → trích link HLS (`.m3u8`) thật → sinh `socolive.m3u`,
-tự chạy 5 phút/lần bằng GitHub Actions và publish qua GitHub Pages.
+Lấy danh sách trận **đang trực tiếp** trên Socolive + link stream HLS (`.m3u8`),
+sinh `socolive.m3u`, chạy định kỳ bằng GitHub Actions và publish qua GitHub Pages.
+
+## Cách hoạt động
+
+Các frontend web của Socolive (socolivef.cv, socoliveaus.co, …) đổi domain liên
+tục và đứng sau Cloudflare — Cloudflare chặn IP datacenter (GitHub Actions) ở
+trang xem. Nhưng tất cả đều đọc từ **một API JSON tĩnh trên CDN cố định**:
+
+```
+https://json.vnres.co/all_live_rooms.json         # danh sách trận + phòng đang live (JSONP)
+https://json.vnres.co/room/<roomNum>/detail.json  # stream URL của phòng đó
+```
+
+Nên `main.py` gọi thẳng API bằng HTTP (pure stdlib, **không cần trình duyệt**):
+nhanh, không dính bot-challenge, và không còn phải lo domain xoay.
 
 ## Chạy local
 
 ```bash
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-playwright install chromium
-python main.py                 # → output/socolive.m3u  (+ index.html)
-SOCOLIVE_HEADLESS=0 python main.py   # xem trình duyệt (debug)
+python3 main.py            # → output/socolive.m3u  (+ index.html)
 ```
 
-Mở `output/socolive.m3u` bằng VLC / IINA / OTT Navigator.
+Không cần cài gì (chỉ dùng thư viện chuẩn của Python 3). Mở `output/socolive.m3u`
+bằng VLC / IINA / OTT Navigator.
 
 ## Biến môi trường
 
 | Biến | Mặc định | Ý nghĩa |
 |------|----------|---------|
-| `SOCOLIVE_BASE` | (đọc `base.txt`) | Danh sách domain, phân tách bằng dấu phẩy. Ưu tiên hơn `base.txt`. |
-| `SOCOLIVE_MAX` | `40` | Số trận vào chi tiết tối đa. |
+| `SOCOLIVE_API` | `https://json.vnres.co` | Host API JSON. Đổi nếu CDN này chết. |
+| `SOCOLIVE_REF` | `https://socoliveaus.co/` | Referer ghi vào m3u (pull host check Referer). |
+| `SOCOLIVE_MAX` | `150` | Số phòng lấy stream tối đa. |
 | `SOCOLIVE_OUT` | `output` | Thư mục xuất (CI dùng `public`). |
-| `SOCOLIVE_HEADLESS` | `1` | `0` = mở trình duyệt. |
+| `SOCOLIVE_INSECURE` | – | `1` = bỏ verify TLS (chỉ dùng khi máy local có proxy MITM). |
 
 ## Deploy lên GitHub + Pages
 
-1. Tạo repo **public** (Actions không giới hạn phút cho repo public; cứ 5 phút/lần
-   sẽ vượt quota free của repo private).
-2. Push toàn bộ code lên nhánh `main`.
-3. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+1. Repo **public** (Actions free không giới hạn phút).
+2. Push code lên `main`.
+3. **Settings → Pages → Source: GitHub Actions**.
 4. **Settings → Actions → General → Workflow permissions → Read and write**.
-5. Vào tab **Actions**, chạy workflow "Crawl & publish M3U" một lần (hoặc đợi cron).
+5. Tab **Actions** → chạy workflow một lần (hoặc đợi cron).
 
-Playlist sẽ ở: `https://<user>.github.io/<repo>/socolive.m3u`
-(trang liệt kê: `https://<user>.github.io/<repo>/`).
+Playlist: `https://<user>.github.io/<repo>/socolive.m3u`
 
-> Cron `*/5` là mốc **tối thiểu** của GitHub — lúc tải cao có thể trễ/gộp run.
-> Link `.m3u8` có `auth_key` hết hạn sau ~vài giờ, nên chạy định kỳ là cần thiết.
+> Cron `*/5` của GitHub là best-effort (hay delay/skip). Muốn đúng 5 phút thì
+> dùng cron ngoài (cron-job.org) gọi API `workflow_dispatch` — xem bên dưới.
 
-## Khi domain đổi (cập nhật nhanh)
+## Chạy đúng 5 phút bằng external trigger
 
-Domain Socolive xoay liên tục. Crawler đã:
-- thử lần lượt các domain trong `base.txt` cho tới khi có domain vào được;
-- tự đi theo redirect tới domain sống.
-
-Chỉ khi **tất cả** domain trong `base.txt` chết mới cần sửa tay:
-
-1. Trên GitHub, mở `base.txt` → nút bút chì (Edit).
-2. Thêm domain mới vào **dòng đầu**, commit.
-3. Workflow có trigger `push` trên `base.txt` → **chạy lại ngay lập tức**, không cần đợi cron.
-
-Không cần đụng Secrets/Variables — `base.txt` là nguồn cấu hình duy nhất.
+GitHub scheduled cron không đảm bảo đúng giờ. Cách chắc ăn: cron-job.org POST tới
+`https://api.github.com/repos/<user>/<repo>/actions/workflows/crawl.yml/dispatches`
+mỗi 5 phút, body `{"ref":"main"}`, header `Authorization: Bearer <token>`
+(fine-grained PAT, quyền *Actions: Read and write* trên repo này).
 
 ## Cảnh báo tự động
 
-**Domain chết** → job `crawl` cố tình **fail** (exit 1) khi:
-- không domain nào trong `base.txt` vào được, hoặc
-- trang chủ vào được nhưng **không có trận nào** (parked page / đổi cấu trúc / bị chặn).
-
-Khi fail, GitHub tự **gửi email** cho chủ repo (bật sẵn ở
-*Settings → Notifications → Actions → email on failure*). Khi đó m3u cũ **không bị
-ghi đè** — playlist gần nhất vẫn còn dùng được cho tới khi bạn sửa `base.txt`.
-Muốn báo qua Telegram/Discord thì thêm 1 step `if: failure()` gọi webhook.
+- **API chết/chặn** → job fail (exit 1) → GitHub gửi email. Khi fail, m3u cũ
+  **không bị ghi đè** (giữ playlist gần nhất). Nếu `json.vnres.co` chết hẳn, đổi
+  `SOCOLIVE_API` sang host mới trong `crawl.yml`.
+- **Hết 60 ngày** → `keepalive.yml` tự commit hàng tuần để scheduled workflow
+  không bị GitHub tự tắt.
 
 > 0 trận đang live **không** phải lỗi (exit 0) — chỉ là hiện không có trận nào phát.
-
-**Hết 60 ngày** → workflow `keepalive.yml` tự commit `.keepalive` mỗi tuần
-(thứ 2, 03:00 UTC) để reset đồng hồ 60 ngày → `crawl.yml` không bao giờ bị
-GitHub tự tắt. Không cần làm gì thủ công.
+> Link `.m3u8` có `auth_key`/`txSecret` hết hạn sau ~vài giờ nên cần chạy định kỳ.
