@@ -1,0 +1,25 @@
+name: Keepalive
+
+# GitHub disables scheduled workflows after 60 days of no repo commits.
+# A weekly commit resets that clock, so crawl.yml never gets auto-disabled.
+on:
+  schedule:
+    - cron: "0 3 * * 1"   # Monday 03:00 UTC, weekly
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Bump timestamp & commit
+        run: |
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .keepalive
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .keepalive
+          git commit -m "chore: keepalive" || exit 0   # nothing to commit → fine
+          git push

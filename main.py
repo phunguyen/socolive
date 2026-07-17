@@ -85,7 +85,7 @@ class SocoliveCrawler:
             else:
                 print("❌ Không domain nào truy cập được. Cập nhật base.txt.")
                 await browser.close()
-                return
+                return False  # domain dead → fail the CI job → GitHub emails owner
             await asyncio.sleep(5)
             base = page.url  # follows redirects to the live domain
             self.base = base
@@ -103,12 +103,20 @@ class SocoliveCrawler:
                     detail_urls.append(u)
             print(f"📋 {len(detail_urls)} trận (bỏ trùng). Vào chi tiết tối đa {MAX_MATCHES}...\n")
 
+            if not detail_urls:
+                # home loaded but no matches → parked page / structure changed / soft block.
+                # Don't overwrite the last good m3u; fail so we get alerted.
+                print("❌ Trang chủ không có trận nào — có thể domain đã đổi cấu trúc/bị chặn.")
+                await browser.close()
+                return False
+
             for i, url in enumerate(detail_urls[:MAX_MATCHES], 1):
                 await self.crawl_detail(page, url, i)
 
             await browser.close()
 
         self.save_data()
+        return True  # 0 trận live vẫn là OK (không có trận nào đang phát)
 
     async def crawl_detail(self, page, url, idx):
         if not await goto_retry(page, url):
@@ -184,4 +192,6 @@ li{{margin:.6rem 0}}a{{color:#0a58ca;text-decoration:none}}code{{background:#eee
 
 
 if __name__ == "__main__":
-    asyncio.run(SocoliveCrawler().run())
+    import sys
+    ok = asyncio.run(SocoliveCrawler().run())
+    sys.exit(0 if ok else 1)

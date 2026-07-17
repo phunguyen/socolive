@@ -52,3 +52,20 @@ Chỉ khi **tất cả** domain trong `base.txt` chết mới cần sửa tay:
 3. Workflow có trigger `push` trên `base.txt` → **chạy lại ngay lập tức**, không cần đợi cron.
 
 Không cần đụng Secrets/Variables — `base.txt` là nguồn cấu hình duy nhất.
+
+## Cảnh báo tự động
+
+**Domain chết** → job `crawl` cố tình **fail** (exit 1) khi:
+- không domain nào trong `base.txt` vào được, hoặc
+- trang chủ vào được nhưng **không có trận nào** (parked page / đổi cấu trúc / bị chặn).
+
+Khi fail, GitHub tự **gửi email** cho chủ repo (bật sẵn ở
+*Settings → Notifications → Actions → email on failure*). Khi đó m3u cũ **không bị
+ghi đè** — playlist gần nhất vẫn còn dùng được cho tới khi bạn sửa `base.txt`.
+Muốn báo qua Telegram/Discord thì thêm 1 step `if: failure()` gọi webhook.
+
+> 0 trận đang live **không** phải lỗi (exit 0) — chỉ là hiện không có trận nào phát.
+
+**Hết 60 ngày** → workflow `keepalive.yml` tự commit `.keepalive` mỗi tuần
+(thứ 2, 03:00 UTC) để reset đồng hồ 60 ngày → `crawl.yml` không bao giờ bị
+GitHub tự tắt. Không cần làm gì thủ công.
