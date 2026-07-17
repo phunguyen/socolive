@@ -1,0 +1,60 @@
+name: Crawl & publish M3U
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"   # every 5 min (GitHub may delay/coalesce runs)
+  workflow_dispatch:         # manual run button
+  push:
+    branches: [main]
+    paths: [base.txt]        # editing base.txt triggers an immediate run
+
+# allow Pages deploy; one run at a time
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-chromium-${{ runner.os }}
+
+      - name: Install deps
+        run: |
+          pip install playwright
+          playwright install --with-deps chromium
+
+      - name: Crawl
+        env:
+          SOCOLIVE_OUT: public
+          SOCOLIVE_HEADLESS: "1"
+          SOCOLIVE_MAX: "60"
+        run: python main.py
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: crawl
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
