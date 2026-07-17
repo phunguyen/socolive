@@ -150,7 +150,7 @@ class SocoliveCrawler:
         # streamData). Reload a few times, waiting for streamData to appear;
         # the cf_clearance cookie set on the first hit usually lets a reload through.
         # Returns (html, challenged) — challenged=True means we never got real data.
-        for attempt in range(3):
+        for _ in range(3):
             if not await goto_retry(page, url, tries=2):
                 continue
             try:
