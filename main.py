@@ -64,6 +64,7 @@ class SocoliveCrawler:
     def __init__(self):
         self.matches = []  # {slug, name, detail_url, anchors:[{name,url}]}
         self.base = BASES[0]  # resolved live base (used for m3u referrer)
+        self.challenged = 0   # detail pages we couldn't read (bot challenge)
 
     async def run(self):
         async with async_playwright() as p:
@@ -94,14 +95,18 @@ class SocoliveCrawler:
                 'a[href*="/truc-tiep/"]',
                 "els => [...new Set(els.map(e => e.getAttribute('href')))]",
             )
-            # dedupe by path (drop ?blv= broadcaster variants — streamData has them all)
-            seen, detail_urls = set(), []
+            # one URL per match (by path), preferring a ?blv= variant — the bare
+            # URL is sometimes gated while the broadcaster URL serves streamData.
+            by_path = {}
             for h in hrefs:
-                u = strip_query(urljoin(base, h))
-                if u not in seen:
-                    seen.add(u)
-                    detail_urls.append(u)
-            print(f"📋 {len(detail_urls)} trận (bỏ trùng). Vào chi tiết tối đa {MAX_MATCHES}...\n")
+                full = urljoin(base, h)
+                path = urlparse(full).path
+                if "/truc-tiep/" not in path:
+                    continue
+                if path not in by_path or "blv=" in full:
+                    by_path[path] = full
+            detail_urls = list(by_path.values())
+            print(f"📋 {len(detail_urls)} trận. Vào chi tiết tối đa {MAX_MATCHES}...\n")
 
             if not detail_urls:
                 # home loaded but no matches → parked page / structure changed / soft block.
@@ -115,36 +120,65 @@ class SocoliveCrawler:
 
             await browser.close()
 
+        # Blocked run: nothing captured but pages were being challenged → don't
+        # overwrite the last good m3u with an empty one; fail so we get alerted.
+        if not self.matches and self.challenged:
+            print("❌ Không lấy được trận nào do bị chặn — giữ m3u cũ, không ghi đè.")
+            return False
+
         self.save_data()
-        return True  # 0 trận live vẫn là OK (không có trận nào đang phát)
+        return True  # 0 trận live (challenged==0) vẫn OK — thật sự không có trận phát
 
     async def crawl_detail(self, page, url, idx):
-        if not await goto_retry(page, url):
-            return
-        await asyncio.sleep(1.5)
-        html = await page.content()
-
         slug = urlparse(url).path.rstrip("/").split("/")[-1]
         name = pretty_from_slug(slug)
 
+        html, challenged = await self._fetch_with_streamdata(page, url)
+        anchors = self._parse_anchors(html)
+
+        if anchors:
+            self.matches.append({"slug": slug, "name": name, "detail_url": url, "anchors": anchors})
+            print(f"   ✓ [{idx}] {name}  → {len(anchors)} luồng")
+        elif challenged:
+            self.challenged += 1
+            print(f"   ⚠️  [{idx}] {name}  → bị chặn/challenge (không đọc được streamData)")
+        else:
+            print(f"   – [{idx}] {name}  → không có luồng (chưa live?)")
+
+    async def _fetch_with_streamdata(self, page, url):
+        # Cloudflare/anti-bot sometimes serves a stripped challenge page (no
+        # streamData). Reload a few times, waiting for streamData to appear;
+        # the cf_clearance cookie set on the first hit usually lets a reload through.
+        # Returns (html, challenged) — challenged=True means we never got real data.
+        for attempt in range(3):
+            if not await goto_retry(page, url, tries=2):
+                continue
+            try:
+                await page.wait_for_function(
+                    "() => document.documentElement.innerHTML.includes('window.streamData')",
+                    timeout=10000,
+                )
+                return await page.content(), False
+            except Exception:
+                await asyncio.sleep(2.5)  # challenge page — let it settle, then reload
+        html = await page.content()
+        # if streamData is present after all, not actually challenged
+        return html, "window.streamData" not in html
+
+    @staticmethod
+    def _parse_anchors(html):
         anchors = []
         m = STREAMDATA_RE.search(html)
         if m:
             try:
-                data = json.loads(m.group(1))
-                for a in data.get("anchors", []):
+                for a in json.loads(m.group(1)).get("anchors", []):
                     su = a.get("streamUrl")
                     if su and ".m3u8" in su:
                         label = (a.get("nickName") or "").strip() or f"BLV {a.get('roomID', '')}"
                         anchors.append({"name": label, "url": su})
             except json.JSONDecodeError:
                 pass
-
-        if anchors:
-            self.matches.append({"slug": slug, "name": name, "detail_url": url, "anchors": anchors})
-            print(f"   ✓ [{idx}] {name}  → {len(anchors)} luồng")
-        else:
-            print(f"   – [{idx}] {name}  → không có luồng (chưa live?)")
+        return anchors
 
     def save_data(self):
         ts = datetime.now().strftime("%Y%m%d_%H%M")
@@ -167,6 +201,8 @@ class SocoliveCrawler:
                     f.write(f"{a['url']}\n")
                     streams += 1
         print(f"\n📺 M3U: {path}  ({len(self.matches)} trận, {streams} luồng)")
+        if self.challenged:
+            print(f"⚠️  {self.challenged} trang bị chặn/challenge — có thể sót trận. IP runner có thể bị rate-limit.")
         print("⏳ Lưu ý: URL .m3u8 có auth_key hết hạn sau ~vài giờ — chạy lại khi cần.")
         self.export_index(streams)
 
