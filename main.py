@@ -14,6 +14,7 @@ import json
 import os
 import ssl
 import time
+import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
@@ -78,8 +79,17 @@ def stream_url(room):
 
 
 def run():
+    print(f"🔌 API = {API}")
     try:
         rooms = live_rooms()
+    except urllib.error.HTTPError as e:
+        body = ""
+        try:
+            body = e.read().decode("utf-8", "replace")[:300]
+        except Exception:
+            pass
+        print(f"❌ all_live_rooms.json → HTTP {e.code}. Body: {body!r}")
+        return False
     except Exception as e:
         print(f"❌ Không lấy được all_live_rooms.json: {e.__class__.__name__}: {e}")
         return False  # API down/blocked → keep last good m3u, fail so CI alerts
