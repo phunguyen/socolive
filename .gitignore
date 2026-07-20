@@ -3,3 +3,5 @@ output/
 public/
 __pycache__/
 *.pyc
+.pages/
+*.log

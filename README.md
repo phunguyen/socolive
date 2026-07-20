@@ -1,30 +1,61 @@
 # socolive-crawler
 
 Lấy danh sách trận **đang trực tiếp** trên Socolive + link stream HLS (`.m3u8`),
-sinh `socolive.m3u`, chạy định kỳ bằng GitHub Actions và publish qua GitHub Pages.
+sinh `socolive.m3u`, chạy định kỳ trên máy (launchd) và publish lên GitHub Pages.
 
 ## Cách hoạt động
 
-Các frontend web của Socolive (socolivef.cv, socoliveaus.co, …) đổi domain liên
-tục và đứng sau Cloudflare — Cloudflare chặn IP datacenter (GitHub Actions) ở
-trang xem. Nhưng tất cả đều đọc từ **một API JSON tĩnh trên CDN cố định**:
+Các frontend web của Socolive đổi domain liên tục và đứng sau Cloudflare. Nhưng
+tất cả đọc từ **một API JSON tĩnh trên CDN cố định**:
 
 ```
-https://json.vnres.co/all_live_rooms.json         # danh sách trận + phòng đang live (JSONP)
+https://json.vnres.co/all_live_rooms.json         # trận + phòng đang live (JSONP)
 https://json.vnres.co/room/<roomNum>/detail.json  # stream URL của phòng đó
 ```
 
-Nên `main.py` gọi thẳng API bằng HTTP (pure stdlib, **không cần trình duyệt**):
-nhanh, không dính bot-challenge, và không còn phải lo domain xoay.
+`main.py` gọi thẳng API bằng HTTP (pure stdlib, **không cần trình duyệt**).
 
-## Chạy local
+> ⚠️ **Vì sao phải chạy local, không dùng GitHub Actions:** `json.vnres.co` chặn
+> theo **quốc gia** (Cloudflare error 1009) — chỉ cho IP trong khu vực (VN). Runner
+> GitHub (IP Mỹ) và cả Cloudflare Worker đều bị chặn. Máy bạn ở VN thì gọi được.
+> Nên crawl chạy trên Mac; GitHub chỉ dùng để **host** file qua Pages.
+
+## Chạy thử
 
 ```bash
 python3 main.py            # → output/socolive.m3u  (+ index.html)
 ```
 
-Không cần cài gì (chỉ dùng thư viện chuẩn của Python 3). Mở `output/socolive.m3u`
-bằng VLC / IINA / OTT Navigator.
+Không cần cài gì (chỉ thư viện chuẩn Python 3). Mở `output/socolive.m3u` bằng
+VLC / IINA / OTT Navigator.
+
+## Cài đặt chạy tự động (local + GitHub Pages)
+
+**1. Tạo nhánh `pages` + worktree (chạy 1 lần):**
+```bash
+bash setup-local.sh
+```
+
+**2. Bật GitHub Pages từ nhánh `pages`:**
+Settings → Pages → Source: **Deploy from a branch** → Branch: **`pages`** / **`/ (root)`**.
+
+**3. Chạy thử deploy 1 lần:**
+```bash
+bash deploy.sh          # crawl → push lên nhánh pages
+```
+→ mở `https://<user>.github.io/<repo>/socolive.m3u`
+
+**4. Cài launchd chạy mỗi 5 phút:**
+```bash
+cp com.socolive.crawler.plist ~/Library/LaunchAgents/
+launchctl load ~/Library/LaunchAgents/com.socolive.crawler.plist
+```
+Gỡ: `launchctl unload ~/Library/LaunchAgents/com.socolive.crawler.plist`
+Log chạy: `deploy.log` trong thư mục repo.
+
+> `deploy.sh` push **1 commit cuộn** (force-push, `--amend`) lên nhánh `pages` nên
+> lịch sử không phình dù chạy 5 phút/lần. Nếu crawl fail (API chặn/đổi), `main.py`
+> exit ≠ 0 → `deploy.sh` dừng, **không ghi đè** playlist cũ đang publish.
 
 ## Biến môi trường
 
@@ -33,60 +64,13 @@ bằng VLC / IINA / OTT Navigator.
 | `SOCOLIVE_API` | `https://json.vnres.co` | Host API JSON. Đổi nếu CDN này chết. |
 | `SOCOLIVE_REF` | `https://socoliveaus.co/` | Referer ghi vào m3u (pull host check Referer). |
 | `SOCOLIVE_MAX` | `150` | Số phòng lấy stream tối đa. |
-| `SOCOLIVE_OUT` | `output` | Thư mục xuất (CI dùng `public`). |
-| `SOCOLIVE_INSECURE` | – | `1` = bỏ verify TLS (chỉ dùng khi máy local có proxy MITM). |
+| `SOCOLIVE_OUT` | `output` | Thư mục xuất (`deploy.sh` dùng `public`). |
+| `SOCOLIVE_INSECURE` | – | `1` = bỏ verify TLS (chỉ khi máy có proxy MITM). |
 
-## Deploy lên GitHub + Pages
+## Lưu ý
 
-1. Repo **public** (Actions free không giới hạn phút).
-2. Push code lên `main`.
-3. **Settings → Pages → Source: GitHub Actions**.
-4. **Settings → Actions → General → Workflow permissions → Read and write**.
-5. Tab **Actions** → chạy workflow một lần (hoặc đợi cron).
-
-Playlist: `https://<user>.github.io/<repo>/socolive.m3u`
-
-> Cron `*/5` của GitHub là best-effort (hay delay/skip). Muốn đúng 5 phút thì
-> dùng cron ngoài (cron-job.org) gọi API `workflow_dispatch` — xem bên dưới.
-
-## Chạy đúng 5 phút bằng external trigger
-
-GitHub scheduled cron không đảm bảo đúng giờ. Cách chắc ăn: cron-job.org POST tới
-`https://api.github.com/repos/<user>/<repo>/actions/workflows/crawl.yml/dispatches`
-mỗi 5 phút, body `{"ref":"main"}`, header `Authorization: Bearer <token>`
-(fine-grained PAT, quyền *Actions: Read and write* trên repo này).
-
-## Vượt chặn 403 bằng Cloudflare Worker (bắt buộc cho GitHub Actions)
-
-`json.vnres.co` chặn IP datacenter → GitHub runner gọi thẳng bị **403**. Nó đứng
-sau Cloudflare, nên một Worker fetch nó từ trong mạng Cloudflare sẽ vượt được.
-Deploy Worker (miễn phí, free tier 100k req/ngày):
-
-```bash
-cd worker
-npx wrangler login          # đăng nhập tài khoản Cloudflare (mở trình duyệt)
-npx wrangler deploy         # in ra URL: https://socolive-proxy.<subdomain>.workers.dev
-```
-
-Test Worker chạy đúng:
-```bash
-curl "https://socolive-proxy.<subdomain>.workers.dev/all_live_rooms.json"   # phải ra JSONP
-```
-
-Rồi trỏ crawler qua Worker — **Settings → Secrets and variables → Actions →
-Variables → New variable**: tên `SOCOLIVE_API`, giá trị là URL Worker
-(không có dấu `/` cuối). Workflow tự đọc biến này; không cần sửa code.
-
-> Worker chỉ proxy `json.vnres.co` + path `*.json` (không phải open proxy).
-> Chạy local thì không cần Worker (IP nhà không bị chặn).
-
-## Cảnh báo tự động
-
-- **API chết/chặn** → job fail (exit 1) → GitHub gửi email. Khi fail, m3u cũ
-  **không bị ghi đè** (giữ playlist gần nhất). Nếu `json.vnres.co` chết hẳn, đổi
-  `SOCOLIVE_API` sang host mới trong `crawl.yml`.
-- **Hết 60 ngày** → `keepalive.yml` tự commit hàng tuần để scheduled workflow
-  không bị GitHub tự tắt.
-
-> 0 trận đang live **không** phải lỗi (exit 0) — chỉ là hiện không có trận nào phát.
-> Link `.m3u8` có `auth_key`/`txSecret` hết hạn sau ~vài giờ nên cần chạy định kỳ.
+- Yêu cầu: máy phải **bật** lúc muốn cập nhật; đang ở **khu vực không bị chặn** (VN).
+- Cần cấu hình SSH push sẵn (đã push tay được là ổn). launchd chạy dưới user của
+  bạn; nếu push lỗi auth, thêm `UseKeychain yes` + `AddKeysToAgent yes` vào `~/.ssh/config`.
+- Link `.m3u8` có `auth_key`/`txSecret` hết hạn sau ~vài giờ → cần chạy định kỳ.
+- 0 trận đang live không phải lỗi (exit 0) — chỉ là hiện không có trận nào phát.

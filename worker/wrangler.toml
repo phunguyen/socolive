@@ -1,9 +1,0 @@
-name = "socolive-proxy"
-main = "worker.js"
-compatibility_date = "2024-11-01"
-workers_dev = true
-
-# Run the Worker near the origin it talks to (json.vnres.co, in Asia) instead of
-# near the client (US GitHub runner) — so the upstream fetch isn't region-blocked.
-[placement]
-mode = "smart"
