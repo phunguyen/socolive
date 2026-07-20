@@ -56,6 +56,30 @@ GitHub scheduled cron không đảm bảo đúng giờ. Cách chắc ăn: cron-j
 mỗi 5 phút, body `{"ref":"main"}`, header `Authorization: Bearer <token>`
 (fine-grained PAT, quyền *Actions: Read and write* trên repo này).
 
+## Vượt chặn 403 bằng Cloudflare Worker (bắt buộc cho GitHub Actions)
+
+`json.vnres.co` chặn IP datacenter → GitHub runner gọi thẳng bị **403**. Nó đứng
+sau Cloudflare, nên một Worker fetch nó từ trong mạng Cloudflare sẽ vượt được.
+Deploy Worker (miễn phí, free tier 100k req/ngày):
+
+```bash
+cd worker
+npx wrangler login          # đăng nhập tài khoản Cloudflare (mở trình duyệt)
+npx wrangler deploy         # in ra URL: https://socolive-proxy.<subdomain>.workers.dev
+```
+
+Test Worker chạy đúng:
+```bash
+curl "https://socolive-proxy.<subdomain>.workers.dev/all_live_rooms.json"   # phải ra JSONP
+```
+
+Rồi trỏ crawler qua Worker — **Settings → Secrets and variables → Actions →
+Variables → New variable**: tên `SOCOLIVE_API`, giá trị là URL Worker
+(không có dấu `/` cuối). Workflow tự đọc biến này; không cần sửa code.
+
+> Worker chỉ proxy `json.vnres.co` + path `*.json` (không phải open proxy).
+> Chạy local thì không cần Worker (IP nhà không bị chặn).
+
 ## Cảnh báo tự động
 
 - **API chết/chặn** → job fail (exit 1) → GitHub gửi email. Khi fail, m3u cũ

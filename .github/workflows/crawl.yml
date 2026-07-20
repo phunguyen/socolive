@@ -28,9 +28,12 @@ jobs:
           python-version: "3.12"
 
       # No dependencies — main.py is pure stdlib (urllib/json). No browser needed.
+      # SOCOLIVE_API: set repo Variable to the Cloudflare Worker URL (datacenter
+      # IPs get 403 hitting json.vnres.co directly). Falls back to direct if unset.
       - name: Crawl
         env:
           SOCOLIVE_OUT: public
+          SOCOLIVE_API: ${{ vars.SOCOLIVE_API || 'https://json.vnres.co' }}
         run: python main.py
 
       - uses: actions/upload-pages-artifact@v3
