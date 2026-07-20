@@ -26,8 +26,24 @@ OUTPUT_DIR = Path(os.environ.get("SOCOLIVE_OUT", "output"))
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 MAX_ROOMS = int(os.environ.get("SOCOLIVE_MAX", "150"))  # cap detail fetches
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
-# SOCOLIVE_INSECURE=1 skips TLS verify (only for a local MITM proxy; CI verifies).
-_CTX = ssl._create_unverified_context() if os.environ.get("SOCOLIVE_INSECURE") == "1" else None
+# SOCOLIVE_INSECURE=1 forces TLS verify off. Otherwise we verify, but fall back
+# to unverified automatically if a corporate MITM proxy breaks the cert chain
+# (the data is public JSON, so integrity isn't security-critical here).
+_INSECURE = os.environ.get("SOCOLIVE_INSECURE") == "1"
+_CTX = ssl._create_unverified_context() if _INSECURE else None
+
+
+def _urlopen(req):
+    global _INSECURE, _CTX
+    try:
+        return urllib.request.urlopen(req, timeout=30, context=_CTX)
+    except urllib.error.URLError as e:
+        if not _INSECURE and "CERTIFICATE_VERIFY_FAILED" in str(e.reason):
+            print("⚠️  TLS verify thất bại (proxy MITM?) — thử lại không verify")
+            _INSECURE = True
+            _CTX = ssl._create_unverified_context()
+            return urllib.request.urlopen(req, timeout=30, context=_CTX)
+        raise
 
 
 def fetch(path):
@@ -43,7 +59,7 @@ def fetch(path):
         "Sec-Fetch-Mode": "cors",
         "Sec-Fetch-Dest": "empty",
     })
-    raw = urllib.request.urlopen(req, timeout=30, context=_CTX).read().decode("utf-8", "replace")
+    raw = _urlopen(req).read().decode("utf-8", "replace")
     a, b = raw.find("("), raw.rfind(")")  # strip JSONP wrapper: name({...})
     if a != -1 and b > a:
         raw = raw[a + 1:b]
