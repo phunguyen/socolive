@@ -199,6 +199,11 @@ def export(matches, n_streams):
         json.dumps(matches, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
+    # " - " in team names (region suffixes like "Santos Fc - SP") makes VLC split
+    # the title into Artist/Title — use en-dash everywhere in display text.
+    def safe(s):
+        return (s or "").replace(" - ", " – ")
+
     m3u = OUTPUT_DIR / "socolive.m3u"
     with m3u.open("w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
@@ -209,17 +214,17 @@ def export(matches, n_streams):
                 teams = f'{meta["host"]} vs {meta["guest"]}'
                 t = fmt_time(meta["time_ms"])
                 logo = meta["hostIcon"]
-            else:  # no schedule entry (e.g. rebroadcast room) → fall back to title
+            else:  # no schedule entry → fall back to title
                 league = title.split(":")[0].strip() if ":" in title else "Live"
                 teams, t, logo = title, "", ""
-            head = f"{t} {teams}".strip()
+            teams = safe(teams)
+            # each match is its own group ("Giải · Giờ · Đội A vs Đội B");
+            # each BLV is a separate entry (title) inside it → readable in players.
+            group = " · ".join(x for x in (safe(league), t, teams) if x)
             logo_attr = f' tvg-logo="{logo}"' if logo else ""
             for r in info["rooms"]:
-                name = f'{head} — {r["blv"]}' if r["blv"] else head
-                # VLC splits the title on " - " into Artist/Title; team names carry
-                # region suffixes like "Santos Fc - SP", so use en-dash to avoid it.
-                name = name.replace(" - ", " – ")
-                f.write(f'#EXTINF:-1{logo_attr} group-title="{league}",{name}\n')
+                blv = safe(r["blv"]) or "stream"
+                f.write(f'#EXTINF:-1 tvg-name="{teams}"{logo_attr} group-title="{group}",{blv}\n')
                 # pull hosts check Referer/UA; VLC & friends honor these hints
                 f.write(f"#EXTVLCOPT:http-referrer={REFERER}\n")
                 f.write(f"#EXTVLCOPT:http-user-agent={UA}\n")
