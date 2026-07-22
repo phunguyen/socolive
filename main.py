@@ -218,13 +218,15 @@ def export(matches, n_streams):
                 league = title.split(":")[0].strip() if ":" in title else "Live"
                 teams, t, logo = title, "", ""
             teams = safe(teams)
-            # each match is its own group ("Giải · Giờ · Đội A vs Đội B");
-            # each BLV is a separate entry (title) inside it → readable in players.
-            group = " · ".join(x for x in (safe(league), t, teams) if x)
+            head = f"{t} {teams}".strip()  # "10:05 22/07 Toluca vs Pumas"
+            # VLC only shows the Title line (ignores group-title/tvg-name), so put
+            # the full match info there. group-title=league + logo still help IPTV
+            # apps (TiviMate/OTT Navigator) show league folders + logo.
             logo_attr = f' tvg-logo="{logo}"' if logo else ""
             for r in info["rooms"]:
-                blv = safe(r["blv"]) or "stream"
-                f.write(f'#EXTINF:-1 tvg-name="{teams}"{logo_attr} group-title="{group}",{blv}\n')
+                blv = safe(r["blv"])
+                name = f"{head} · {blv}" if blv else head
+                f.write(f'#EXTINF:-1 tvg-name="{teams}"{logo_attr} group-title="{safe(league)}",{name}\n')
                 # pull hosts check Referer/UA; VLC & friends honor these hints
                 f.write(f"#EXTVLCOPT:http-referrer={REFERER}\n")
                 f.write(f"#EXTVLCOPT:http-user-agent={UA}\n")
