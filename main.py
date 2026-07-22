@@ -17,8 +17,10 @@ import time
 import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
+
+VN = timezone(timedelta(hours=7))  # match times are displayed in VN time
 
 API = os.environ.get("SOCOLIVE_API", "https://json.vnres.co").rstrip("/")
 REFERER = os.environ.get("SOCOLIVE_REF", "https://socoliveaus.co/")
@@ -94,6 +96,53 @@ def stream_url(room):
         return None
 
 
+def match_meta():
+    """title -> {league, host, guest, hostIcon, guestIcon, time_ms}.
+
+    matches.json has kickoff time + team names/logos. Live-room `title` is
+    "<subCateName>: <hostName> vs <guestName>", so we join on that. Best-effort:
+    returns {} on any failure and the caller falls back to the raw title.
+    """
+    try:
+        d = fetch("matches.json")
+    except Exception as e:
+        print(f"⚠️  matches.json lỗi ({e.__class__.__name__}) — bỏ qua time/logo")
+        return {}
+    ms = []
+
+    def collect(o):
+        if isinstance(o, dict):
+            if "hostName" in o and "anchors" in o:
+                ms.append(o)
+            else:
+                for v in o.values():
+                    collect(v)
+        elif isinstance(o, list):
+            for v in o:
+                collect(v)
+
+    collect(d.get("data"))
+    out = {}
+    for m in ms:
+        league = (m.get("subCateName") or m.get("categoryName") or "").strip()
+        host = (m.get("hostName") or "").strip()
+        guest = (m.get("guestName") or "").strip()
+        key = f"{league}: {host} vs {guest}".strip()
+        out[key] = {
+            "league": league,
+            "host": host,
+            "guest": guest,
+            "hostIcon": m.get("hostIcon") or "",
+            "guestIcon": m.get("guestIcon") or "",
+            "time_ms": m.get("matchTime") or 0,
+        }
+    return out
+
+
+def fmt_time(ms):
+    return datetime.fromtimestamp(ms / 1000, VN).strftime("%H:%M %d/%m") if ms else ""
+
+
 def run():
     print(f"🔌 API = {API}")
     try:
@@ -124,10 +173,11 @@ def run():
         print("❌ Có phòng live nhưng không lấy được stream nào — giữ m3u cũ.")
         return False
 
-    # group rooms by match title
+    # enrich with match time + team logos (best-effort), group by match title
+    meta = match_meta()
     matches = {}
     for r in live:
-        matches.setdefault(r["title"], []).append(r)
+        matches.setdefault(r["title"], {"meta": meta.get(r["title"]), "rooms": []})["rooms"].append(r)
 
     export(matches, len(live))
     return True
@@ -142,10 +192,21 @@ def export(matches, n_streams):
     m3u = OUTPUT_DIR / "socolive.m3u"
     with m3u.open("w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
-        for title, rooms in matches.items():
-            for r in rooms:
-                name = f'{title} — {r["blv"]}' if r["blv"] else title
-                f.write(f'#EXTINF:-1 group-title="{title}",{name}\n')
+        for title, info in matches.items():
+            meta = info["meta"]
+            if meta:
+                league = meta["league"] or "Live"
+                teams = f'{meta["host"]} vs {meta["guest"]}'
+                t = fmt_time(meta["time_ms"])
+                logo = meta["hostIcon"]
+            else:  # no schedule entry (e.g. rebroadcast room) → fall back to title
+                league = title.split(":")[0].strip() if ":" in title else "Live"
+                teams, t, logo = title, "", ""
+            head = f"{t} {teams}".strip()
+            logo_attr = f' tvg-logo="{logo}"' if logo else ""
+            for r in info["rooms"]:
+                name = f'{head} — {r["blv"]}' if r["blv"] else head
+                f.write(f'#EXTINF:-1{logo_attr} group-title="{league}",{name}\n')
                 # pull hosts check Referer/UA; VLC & friends honor these hints
                 f.write(f"#EXTVLCOPT:http-referrer={REFERER}\n")
                 f.write(f"#EXTVLCOPT:http-user-agent={UA}\n")
@@ -155,17 +216,24 @@ def export(matches, n_streams):
     print("⏳ Lưu ý: URL .m3u8 có auth_key hết hạn sau ~vài giờ — chạy lại khi cần.")
 
     rows = []
-    for title, rooms in matches.items():
-        links = " · ".join(f'<a href="{r["url"]}">{r["blv"] or "stream"}</a>' for r in rooms)
-        rows.append(f"<li><b>{title}</b><br><small>{links}</small></li>")
-    updated = datetime.now().strftime("%Y-%m-%d %H:%M")
+    for title, info in matches.items():
+        meta = info["meta"]
+        if meta:
+            ico = lambda u: f'<img src="{u}" width="18" style="vertical-align:middle">' if u else ""
+            head = (f'{ico(meta["hostIcon"])} <b>{meta["host"]} vs {meta["guest"]}</b> '
+                    f'{ico(meta["guestIcon"])} <small>{meta["league"]} · {fmt_time(meta["time_ms"])}</small>')
+        else:
+            head = f"<b>{title}</b>"
+        links = " · ".join(f'<a href="{r["url"]}">{r["blv"] or "stream"}</a>' for r in info["rooms"])
+        rows.append(f"<li>{head}<br><small>{links}</small></li>")
+    updated = datetime.now(VN).strftime("%Y-%m-%d %H:%M")
     (OUTPUT_DIR / "index.html").write_text(
         f"""<!doctype html><meta charset="utf-8">
 <title>Socolive M3U</title>
-<style>body{{font-family:system-ui,sans-serif;max-width:760px;margin:2rem auto;padding:0 1rem}}
-li{{margin:.6rem 0}}a{{color:#0a58ca;text-decoration:none}}</style>
+<style>body{{font-family:system-ui,sans-serif;max-width:820px;margin:2rem auto;padding:0 1rem}}
+li{{margin:.7rem 0}}a{{color:#0a58ca;text-decoration:none}}img{{border-radius:3px}}</style>
 <h1>📺 Socolive M3U</h1>
-<p>Cập nhật: {updated} · {len(matches)} trận · {n_streams} luồng</p>
+<p>Cập nhật: {updated} (VN) · {len(matches)} trận · {n_streams} luồng</p>
 <p><b>Playlist:</b> <a href="socolive.m3u">socolive.m3u</a> — mở trong VLC / OTT Navigator / IINA.</p>
 <ol>{''.join(rows) or '<li>Chưa có trận nào đang live.</li>'}</ol>""",
         encoding="utf-8",

@@ -5,8 +5,11 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-# launchd runs with a minimal PATH — make python3/git findable.
+# launchd/cron run with a minimal PATH — make python3/git findable.
 export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+
+# self-update: pull latest code before running (ignore if offline / diverged).
+git pull -q --ff-only origin main 2>/dev/null || true
 
 # 1) crawl. If the API is blocked/down, main.py exits non-zero → set -e stops
 #    here and the last published playlist stays untouched.
