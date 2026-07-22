@@ -173,13 +173,23 @@ def run():
         print("❌ Có phòng live nhưng không lấy được stream nào — giữ m3u cũ.")
         return False
 
-    # enrich with match time + team logos (best-effort), group by match title
+    # enrich with match time + team logos (best-effort), group by match title.
+    # Drop rooms not in the schedule (rebroadcast/commentary) — but only if
+    # matches.json loaded; if it failed (meta empty) keep all, don't publish empty.
     meta = match_meta()
     matches = {}
+    dropped = 0
     for r in live:
-        matches.setdefault(r["title"], {"meta": meta.get(r["title"]), "rooms": []})["rooms"].append(r)
+        m = meta.get(r["title"])
+        if meta and m is None:
+            dropped += 1
+            continue
+        matches.setdefault(r["title"], {"meta": m, "rooms": []})["rooms"].append(r)
+    if dropped:
+        print(f"🚫 Bỏ {dropped} luồng không có trong lịch matches.json")
 
-    export(matches, len(live))
+    n_streams = sum(len(v["rooms"]) for v in matches.values())
+    export(matches, n_streams)
     return True
 
 
