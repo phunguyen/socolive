@@ -216,6 +216,9 @@ def export(matches, n_streams):
             logo_attr = f' tvg-logo="{logo}"' if logo else ""
             for r in info["rooms"]:
                 name = f'{head} — {r["blv"]}' if r["blv"] else head
+                # VLC splits the title on " - " into Artist/Title; team names carry
+                # region suffixes like "Santos Fc - SP", so use en-dash to avoid it.
+                name = name.replace(" - ", " – ")
                 f.write(f'#EXTINF:-1{logo_attr} group-title="{league}",{name}\n')
                 # pull hosts check Referer/UA; VLC & friends honor these hints
                 f.write(f"#EXTVLCOPT:http-referrer={REFERER}\n")
