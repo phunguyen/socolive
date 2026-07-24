@@ -10,8 +10,11 @@ player pages. But they all read from one static JSON API on a stable CDN host:
 So we skip the browser entirely and hit the API directly over plain HTTP:
 fast, no bot-challenge, and domain-rotation stops mattering.
 """
+import hashlib
+import io
 import json
 import os
+import shutil
 import ssl
 import time
 import urllib.error
@@ -27,6 +30,11 @@ REFERER = os.environ.get("SOCOLIVE_REF", "https://socoliveaus.co/")
 OUTPUT_DIR = Path(os.environ.get("SOCOLIVE_OUT", "output"))
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 MAX_ROOMS = int(os.environ.get("SOCOLIVE_MAX", "150"))  # cap detail fetches
+# tvg-logo has room for ONE image, so "single" shows only the host team's logo.
+# "vs" composites host+guest into one "A vs B" PNG (needs Pillow), hosted under
+# BASE/logos/<day>/ so IPTV apps can point tvg-logo at it.
+LOGO_MODE = os.environ.get("SOCOLIVE_LOGO", "single")  # single | vs
+BASE = os.environ.get("SOCOLIVE_BASE", "https://phunguyen.github.io/socolive").rstrip("/")
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
 # SOCOLIVE_INSECURE=1 forces TLS verify off. Otherwise we verify, but fall back
 # to unverified automatically if a corporate MITM proxy breaks the cert chain
@@ -143,6 +151,59 @@ def fmt_time(ms):
     return datetime.fromtimestamp(ms / 1000, VN).strftime("%H:%M %d/%m") if ms else ""
 
 
+def _pillow_ok():
+    """vs mode needs Pillow; fall back to single (with a note) if it's missing."""
+    try:
+        import PIL  # noqa: F401
+        return True
+    except ImportError:
+        print("⚠️  SOCOLIVE_LOGO=vs nhưng thiếu Pillow — dùng logo 1 đội. "
+              "Cài: pip install Pillow")
+        return False
+
+
+def _download(url):
+    req = urllib.request.Request(url, headers={"User-Agent": UA, "Referer": REFERER})
+    return _urlopen(req).read()
+
+
+def vs_logo(title, host_url, guest_url, day_dir):
+    """Composite host+guest logos side by side into one PNG in day_dir.
+
+    Returns the filename (idempotent per title) or None on any failure so the
+    caller falls back to the single host logo.
+    """
+    from PIL import Image  # only needed in "vs" mode; keeps single mode stdlib-only
+    name = hashlib.md5(title.encode()).hexdigest()[:12] + ".png"
+    path = day_dir / name
+    if path.exists():
+        return name
+    try:
+        imgs = [Image.open(io.BytesIO(_download(u))).convert("RGBA")
+                for u in (host_url, guest_url)]
+    except Exception as e:
+        print(f"⚠️  logo {title!r}: {e.__class__.__name__}")
+        return None
+    H, gap = 120, 24
+    scaled = [im.resize((max(1, round(im.width * H / im.height)), H)) for im in imgs]
+    canvas = Image.new("RGBA", (sum(im.width for im in scaled) + gap, H), (0, 0, 0, 0))
+    x = 0
+    for im in scaled:
+        canvas.paste(im, (x, 0), im)
+        x += im.width + gap
+    canvas.save(path)
+    return name
+
+
+def clean_old_logos(logos_root, keep_day):
+    """Drop logo folders from previous days (keep only keep_day's)."""
+    if not logos_root.exists():
+        return
+    for d in logos_root.iterdir():
+        if d.is_dir() and d.name != keep_day:
+            shutil.rmtree(d, ignore_errors=True)
+
+
 def run():
     print(f"🔌 API = {API}")
     try:
@@ -204,6 +265,14 @@ def export(matches, n_streams):
     def safe(s):
         return (s or "").replace(" - ", " – ")
 
+    day = datetime.now(VN).strftime("%Y%m%d")
+    day_dir = None
+    if LOGO_MODE == "vs" and _pillow_ok():
+        logos_root = OUTPUT_DIR / "logos"
+        clean_old_logos(logos_root, day)  # drop past days' composites
+        day_dir = logos_root / day
+        day_dir.mkdir(parents=True, exist_ok=True)
+
     m3u = OUTPUT_DIR / "socolive.m3u"
     with m3u.open("w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
@@ -214,6 +283,10 @@ def export(matches, n_streams):
                 teams = f'{meta["host"]} vs {meta["guest"]}'
                 t = fmt_time(meta["time_ms"])
                 logo = meta["hostIcon"]
+                if day_dir is not None and meta["hostIcon"] and meta["guestIcon"]:
+                    fn = vs_logo(title, meta["hostIcon"], meta["guestIcon"], day_dir)
+                    if fn:
+                        logo = f"{BASE}/logos/{day}/{fn}"
             else:  # no schedule entry → fall back to title
                 league = title.split(":")[0].strip() if ":" in title else "Live"
                 teams, t, logo = title, "", ""

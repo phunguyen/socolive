@@ -13,7 +13,10 @@ git pull -q --ff-only origin main 2>/dev/null || true
 
 # 1) crawl. If the API is blocked/down, main.py exits non-zero → set -e stops
 #    here and the last published playlist stays untouched.
-SOCOLIVE_OUT=public python3 main.py
+# $PYTHON lets each machine pick its interpreter (VPS: default python3; this Mac:
+# set PYTHON=/Users/phu.nb/.local/bin/python3 in the launchd plist, since the
+# Homebrew python3 here lacks Pillow). SOCOLIVE_LOGO=vs enables composite logos.
+SOCOLIVE_OUT=public "${PYTHON:-python3}" main.py
 
 # 2) self-heal the worktree if missing (e.g. first run after a fresh clone).
 if [ ! -e .pages/.git ]; then
@@ -24,6 +27,10 @@ fi
 
 # 3) publish: copy outputs, amend the single rolling commit, force-push.
 cp public/socolive.m3u public/index.html .pages/
+# sync "vs"-mode composite logos (no-op in single mode); --delete drops past days.
+if [ -d public/logos ]; then
+  rsync -a --delete public/logos/ .pages/logos/
+fi
 touch .pages/.nojekyll
 git -C .pages add -A
 git -C .pages commit -q --amend -m "socolive m3u $(date -u +%FT%TZ)" \

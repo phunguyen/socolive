@@ -7,16 +7,23 @@ cd "$(dirname "$0")"
 command -v python3 >/dev/null || { echo "❌ thiếu python3 — sudo apt install -y python3"; exit 1; }
 command -v git >/dev/null     || { echo "❌ thiếu git — sudo apt install -y git"; exit 1; }
 
+echo "→ kiểm tra Pillow (cho logo ghép A vs B)..."
+if ! python3 -c "import PIL" 2>/dev/null; then
+  echo "  cài Pillow..."
+  sudo apt-get install -y python3-pil 2>/dev/null || pip3 install --break-system-packages Pillow \
+    || { echo "❌ không cài được Pillow — cài tay rồi chạy lại"; exit 1; }
+fi
+
 echo "→ kiểm tra region..."
 code="$(curl -sS -o /dev/null -w '%{http_code}' 'https://json.vnres.co/all_live_rooms.json' || true)"
 echo "  API HTTP $code"
 [ "$code" = "200" ] || { echo "❌ API không trả 200 (VPS có thể bị chặn region). Dừng."; exit 1; }
 
-echo "→ chạy thử deploy..."
-bash deploy.sh
+echo "→ chạy thử deploy (logo ghép A vs B)..."
+SOCOLIVE_LOGO=vs bash deploy.sh
 
 echo "→ cài cron (mỗi 5 phút, idempotent)..."
-line="*/5 * * * * cd $(pwd) && /bin/bash deploy.sh >> deploy.log 2>&1"
+line="*/5 * * * * cd $(pwd) && SOCOLIVE_LOGO=vs /bin/bash deploy.sh >> deploy.log 2>&1"
 ( crontab -l 2>/dev/null | grep -vF "deploy.sh" ; echo "$line" ) | crontab -
 echo "✅ xong. cron hiện tại:"
 crontab -l | grep deploy.sh
