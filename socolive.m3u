@@ -1,161 +1,181 @@
 #EXTM3U
-#EXTINF:-1 tvg-name="Hull City vs Manchester United" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4e935d3e0a67.png" group-title="ENG PR",18:30 22/08 Hull City vs Manchester United · LÃO LÂM
+#EXTINF:-1 tvg-name="Newcastle United vs Bournemouth AFC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9cf3a81a470d.png" group-title="ENG PR",18:30 05/09 Newcastle United vs Bournemouth AFC · BLV ZOWIE
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-527384_lhd.m3u8?auth_key=1787402401-0-0-b12ca75f115ca98ccfd7d4814d113ea8
-#EXTINF:-1 tvg-name="Hull City vs Manchester United" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4e935d3e0a67.png" group-title="ENG PR",18:30 22/08 Hull City vs Manchester United · BLV TOMIA
+https://pull.niues.live/live/stream-9912110_lhd.m3u8?auth_key=1788611342-0-0-12643604b1c2aaa8412e59196fe82e10
+#EXTINF:-1 tvg-name="Newcastle United vs Bournemouth AFC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9cf3a81a470d.png" group-title="ENG PR",18:30 05/09 Newcastle United vs Bournemouth AFC · BLV TAP
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-9912008_lhd.m3u8?auth_key=1787402400-0-0-d3a60d0e866027bfbf80997b46dc18fe
-#EXTINF:-1 tvg-name="Hull City vs Manchester United" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4e935d3e0a67.png" group-title="ENG PR",18:30 22/08 Hull City vs Manchester United · RICKHANTER
+https://pull.niur.live/live/stream-9912041_lhd.m3u8?txSecret=896a7234e4495e8176c5610b1951fd6c&txTime=6a9c515d
+#EXTINF:-1 tvg-name="Newcastle United vs Bournemouth AFC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9cf3a81a470d.png" group-title="ENG PR",18:30 05/09 Newcastle United vs Bournemouth AFC · TẠ BIÊN GIỚI
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-9912122_lhd.m3u8?txSecret=e9bf2b04d3ef4cf778f72e8fde479274&txTime=6a89def0
-#EXTINF:-1 tvg-name="Hull City vs Manchester United" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4e935d3e0a67.png" group-title="ENG PR",18:30 22/08 Hull City vs Manchester United · NGƯỜI CÁ
+https://pull.niues.live/live/stream-9912144_lhd.m3u8?auth_key=1788611341-0-0-6d3beef8811d07f9132a435a14ea35a3
+#EXTINF:-1 tvg-name="Newcastle United vs Bournemouth AFC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9cf3a81a470d.png" group-title="ENG PR",18:30 05/09 Newcastle United vs Bournemouth AFC · BLV TOMIA
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-595335_lhd.m3u8?auth_key=1787402401-0-0-bc5fdf84e087a1319b3eeed5ab045a27
-#EXTINF:-1 tvg-name="Hull City vs Manchester United" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4e935d3e0a67.png" group-title="ENG PR",18:30 22/08 Hull City vs Manchester United · QUỐC KHÁNH
+https://pull.niues.live/live/stream-9912008_lhd.m3u8?auth_key=1788611341-0-0-2c28a55a0080ebb8358265dc457898df
+#EXTINF:-1 tvg-name="Newcastle United vs Bournemouth AFC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9cf3a81a470d.png" group-title="ENG PR",18:30 05/09 Newcastle United vs Bournemouth AFC · ZIDANE
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-9912118_lhd.m3u8?txSecret=9d3f33c4d31b8d6d16bc47fbf6d841d9&txTime=6a89def1
-#EXTINF:-1 tvg-name="Hull City vs Manchester United" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4e935d3e0a67.png" group-title="ENG PR",18:30 22/08 Hull City vs Manchester United · CÔNG CHẤT
+https://pull.niues.live/live/stream-9912145_lhd.m3u8?auth_key=1788611341-0-0-dcf7d0c76ff58d0f3974c8accf55a9fb
+#EXTINF:-1 tvg-name="Newcastle United vs Bournemouth AFC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9cf3a81a470d.png" group-title="ENG PR",18:30 05/09 Newcastle United vs Bournemouth AFC · BLV Củ Cải
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-291277_lhd.m3u8?txSecret=495359c5fe4edbc259ebd0615eb4bbcd&txTime=6a89def0
-#EXTINF:-1 tvg-name="Hull City vs Manchester United" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4e935d3e0a67.png" group-title="ENG PR",18:30 22/08 Hull City vs Manchester United · THOMAS
+https://pull.niues.live/live/stream-9912091_lhd.m3u8?auth_key=1788611342-0-0-b82ea7eefeee82be2cf265cf190b5847
+#EXTINF:-1 tvg-name="Newcastle United vs Bournemouth AFC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9cf3a81a470d.png" group-title="ENG PR",18:30 05/09 Newcastle United vs Bournemouth AFC · BLV ALEX
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-414317_lhd.m3u8?txSecret=b51ceae6e38cdcef306ec66c1936d5d4&txTime=6a89def0
-#EXTINF:-1 tvg-name="Hull City vs Manchester United" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4e935d3e0a67.png" group-title="ENG PR",18:30 22/08 Hull City vs Manchester United · CR Bưởi
+https://pull.niues.live/live/stream-532081_lhd.m3u8?auth_key=1788611342-0-0-6e85dcb6280171db5383fff46be87a31
+#EXTINF:-1 tvg-name="Newcastle United vs Bournemouth AFC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9cf3a81a470d.png" group-title="ENG PR",18:30 05/09 Newcastle United vs Bournemouth AFC · BLV CUỘI
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-387694_lhd.m3u8?txSecret=12b9bc16a6998acf71fe9efa82587d9b&txTime=6a89def0
-#EXTINF:-1 tvg-name="Hull City vs Manchester United" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4e935d3e0a67.png" group-title="ENG PR",18:30 22/08 Hull City vs Manchester United · A BỆU
+https://pull.niues.live/live/stream-9912146_lhd.m3u8?auth_key=1788611341-0-0-6ad5b5b35b7bf6ab89ed8ac0e0c31389
+#EXTINF:-1 tvg-name="Newcastle United vs Bournemouth AFC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9cf3a81a470d.png" group-title="ENG PR",18:30 05/09 Newcastle United vs Bournemouth AFC · LÃO LÂM
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-484845_lhd.m3u8?txSecret=6d836f0ca42b66047cc595f02f6b7866&txTime=6a89def0
-#EXTINF:-1 tvg-name="Hull City vs Manchester United" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4e935d3e0a67.png" group-title="ENG PR",18:30 22/08 Hull City vs Manchester United · SAO LA
+https://pull.niues.live/live/stream-527384_lhd.m3u8?auth_key=1788611342-0-0-4b3ddb0be5d929492ccd8e03259a24ea
+#EXTINF:-1 tvg-name="Newcastle United vs Bournemouth AFC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9cf3a81a470d.png" group-title="ENG PR",18:30 05/09 Newcastle United vs Bournemouth AFC · CR Bưởi
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-462413_lhd.m3u8?txSecret=b3d51f3a2d0c7476dcaf041d6fb278b0&txTime=6a89def0
-#EXTINF:-1 tvg-name="Hull City vs Manchester United" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4e935d3e0a67.png" group-title="ENG PR",18:30 22/08 Hull City vs Manchester United · BLV GIÓ
+https://pull.niur.live/live/stream-387694_lhd.m3u8?txSecret=67060ef771fa4d23e49a625702ac4e97&txTime=6a9c515e
+#EXTINF:-1 tvg-name="Newcastle United vs Bournemouth AFC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9cf3a81a470d.png" group-title="ENG PR",18:30 05/09 Newcastle United vs Bournemouth AFC · BLV HEHE
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-321443_lhd.m3u8?txSecret=f072f33b36e322dc4cab0cb976d0da50&txTime=6a89def0
-#EXTINF:-1 tvg-name="Hull City vs Manchester United" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4e935d3e0a67.png" group-title="ENG PR",18:30 22/08 Hull City vs Manchester United · BLV LONG
+https://pull.niues.live/live/stream-622241_lhd.m3u8?auth_key=1788611342-0-0-5b336ba7f47a3d8613a9ef75e265ae54
+#EXTINF:-1 tvg-name="Newcastle United vs Bournemouth AFC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9cf3a81a470d.png" group-title="ENG PR",18:30 05/09 Newcastle United vs Bournemouth AFC · THOMAS
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-9912117_lhd.m3u8?auth_key=1787402400-0-0-ab0a2d7372b07b37869d5a6398ed22c9
-#EXTINF:-1 tvg-name="Sanfrecce Hiroshima vs Kawasaki Frontale" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/3611ddbf56d1.png" group-title="JPN D1",17:15 22/08 Sanfrecce Hiroshima vs Kawasaki Frontale · BLV A TÚ
+https://pull.niur.live/live/stream-414317_lhd.m3u8?txSecret=e1c6745fee6412266e3ae755b8cd682d&txTime=6a9c519a
+#EXTINF:-1 tvg-name="Cong An Ho Chi Minh City vs Hanoi FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/0aaac6555515.png" group-title="VIE D1",18:00 05/09 Cong An Ho Chi Minh City vs Hanoi FC · SEVEN
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-557845_lhd.m3u8?auth_key=1787402401-0-0-1eb73ec6a860c55e8e37366711202d94
-#EXTINF:-1 tvg-name="Sanfrecce Hiroshima vs Kawasaki Frontale" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/3611ddbf56d1.png" group-title="JPN D1",17:15 22/08 Sanfrecce Hiroshima vs Kawasaki Frontale · BLV ROBBEN
+https://pull.niur.live/live/stream-9912126_lhd.m3u8?txSecret=894ae9041e1956d6821361a8d2ad8fe5&txTime=6a9c515e
+#EXTINF:-1 tvg-name="Cong An Ho Chi Minh City vs Hanoi FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/0aaac6555515.png" group-title="VIE D1",18:00 05/09 Cong An Ho Chi Minh City vs Hanoi FC · BLV CÒ
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-527383_lhd.m3u8?auth_key=1787402401-0-0-2e59ca23d59f90322fc427ec0f4c68b6
-#EXTINF:-1 tvg-name="Cerezo Osaka vs Shimizu S-Pulse" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/8541f42f1f83.png" group-title="JPN D1",17:00 22/08 Cerezo Osaka vs Shimizu S-Pulse · HẢI THANH
+https://pull.niues.live/live/stream-582342_lhd.m3u8?auth_key=1788611402-0-0-312224a91e74d679aa1bf912d1baa6ff
+#EXTINF:-1 tvg-name="Cong An Ho Chi Minh City vs Hanoi FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/0aaac6555515.png" group-title="VIE D1",18:00 05/09 Cong An Ho Chi Minh City vs Hanoi FC · CHÍ PHÈO
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-9912119_lhd.m3u8?auth_key=1787402401-0-0-18755abe4cf91b8f86dabcee1c99d3e9
-#EXTINF:-1 tvg-name="Cerezo Osaka vs Shimizu S-Pulse" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/8541f42f1f83.png" group-title="JPN D1",17:00 22/08 Cerezo Osaka vs Shimizu S-Pulse · BLV CÁO
+https://pull.niues.live/live/stream-9912131_lhd.m3u8?auth_key=1788611402-0-0-337fcd3659aca358ef6b596c671e3fdc
+#EXTINF:-1 tvg-name="Cong An Ho Chi Minh City vs Hanoi FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/0aaac6555515.png" group-title="VIE D1",18:00 05/09 Cong An Ho Chi Minh City vs Hanoi FC · BLV XO
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-597929_lhd.m3u8?auth_key=1787402401-0-0-72f89360fab87195efd31e3951a73bac
-#EXTINF:-1 tvg-name="FC Anyang vs FC Seoul" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4048c2bc4e17.png" group-title="KOR D1",17:30 22/08 FC Anyang vs FC Seoul · BLV PEWPEW
+https://pull.niur.live/live/stream-9912132_lhd.m3u8?txSecret=ba3b2da799c0fff7a157d5a8bf2fcfe8&txTime=6a9c519a
+#EXTINF:-1 tvg-name="Avispa Fukuoka vs Mito Hollyhock" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/4215471f1be3.png" group-title="JPN D1",17:00 05/09 Avispa Fukuoka vs Mito Hollyhock · BLV MESSI
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-9912015_lhd.m3u8?auth_key=1787402400-0-0-0906956ae327f52ced697926045f82db
-#EXTINF:-1 tvg-name="FC Anyang vs FC Seoul" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4048c2bc4e17.png" group-title="KOR D1",17:30 22/08 FC Anyang vs FC Seoul · BLV FIREMAN
+https://pull.niues.live/live/stream-9912141_lhd.m3u8?auth_key=1788611402-0-0-d93e8bbfbbe75b6eb6e41f475fcf6bc5
+#EXTINF:-1 tvg-name="Avispa Fukuoka vs Mito Hollyhock" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/4215471f1be3.png" group-title="JPN D1",17:00 05/09 Avispa Fukuoka vs Mito Hollyhock · CACAO
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-991140_lhd.m3u8?auth_key=1787402400-0-0-3a8ae45754b569a7715c37cf2751903d
-#EXTINF:-1 tvg-name="Yokohama F. Marinos vs Vissel Kobe" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/9ccce3b09fe2.png" group-title="JPN D1",17:30 22/08 Yokohama F. Marinos vs Vissel Kobe · BÁ PHÚ
+https://pull.niues.live/live/stream-9912128_lhd.m3u8?auth_key=1788611402-0-0-71111a7bd50cc387f7a2a956f69571e8
+#EXTINF:-1 tvg-name="Avispa Fukuoka vs Mito Hollyhock" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/4215471f1be3.png" group-title="JPN D1",17:00 05/09 Avispa Fukuoka vs Mito Hollyhock · KENCHU
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-9912108_lhd.m3u8?auth_key=1787402400-0-0-1a1a4c8dad377ab3804f29563fd9791a
-#EXTINF:-1 tvg-name="Yokohama F. Marinos vs Vissel Kobe" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/9ccce3b09fe2.png" group-title="JPN D1",17:30 22/08 Yokohama F. Marinos vs Vissel Kobe · BLV CHIVAS
+https://pull.niues.live/live/stream-9912124_lhd.m3u8?auth_key=1788611402-0-0-42731cd3b651388d6f3dc9e6c00ab649
+#EXTINF:-1 tvg-name="Avispa Fukuoka vs Mito Hollyhock" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/4215471f1be3.png" group-title="JPN D1",17:00 05/09 Avispa Fukuoka vs Mito Hollyhock · BLV KAN
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-485739_lhd.m3u8?txSecret=db60e947c1242dd8976ae14d572ef1b2&txTime=6a89def0
-#EXTINF:-1 tvg-name="Wuhan Three Towns vs Tianjin Jinmen Tiger" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/234f6b677799.png" group-title="CHA SL",18:00 22/08 Wuhan Three Towns vs Tianjin Jinmen Tiger · CACAO
+https://pull.niur.live/live/stream-283501_lhd.m3u8?txSecret=0213a9ce5d72980edc7c0baa38833b38&txTime=6a9c519a
+#EXTINF:-1 tvg-name="XM Hai Phong FC vs Ninh Binh FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/3de835dd42ad.png" group-title="VIE D1",18:00 05/09 XM Hai Phong FC vs Ninh Binh FC · NEKO
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-620661_lhd.m3u8?auth_key=1787402401-0-0-a10ddf958d9263af43d2ea5c72110bd3
-#EXTINF:-1 tvg-name="Wuhan Three Towns vs Tianjin Jinmen Tiger" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/234f6b677799.png" group-title="CHA SL",18:00 22/08 Wuhan Three Towns vs Tianjin Jinmen Tiger · SEVEN
+https://pull.niues.live/live/stream-625920_lhd.m3u8?auth_key=1788611342-0-0-10dc5172ddca8b1241977af819ed4aa0
+#EXTINF:-1 tvg-name="XM Hai Phong FC vs Ninh Binh FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/3de835dd42ad.png" group-title="VIE D1",18:00 05/09 XM Hai Phong FC vs Ninh Binh FC · A PÁO
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-618546_lhd.m3u8?txSecret=40689f57a4f1079fc1240ddddd259b61&txTime=6a89def1
-#EXTINF:-1 tvg-name="SV Wehen Wiesbaden vs Bayer 04 Leverkusen" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/2381a6e4bc3c.png" group-title="GERC",18:00 22/08 SV Wehen Wiesbaden vs Bayer 04 Leverkusen · BLV YONE
+https://pull.niues.live/live/stream-235232_lhd.m3u8?auth_key=1788611402-0-0-626e5ed5412d0be768d98e19542e00b5
+#EXTINF:-1 tvg-name="XM Hai Phong FC vs Ninh Binh FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/3de835dd42ad.png" group-title="VIE D1",18:00 05/09 XM Hai Phong FC vs Ninh Binh FC · BLV LUCAS
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-372746_lhd.m3u8?auth_key=1787402400-0-0-c43d7d673c09b6cdb3f0baaeb0ed0a10
-#EXTINF:-1 tvg-name="SV Wehen Wiesbaden vs Bayer 04 Leverkusen" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/2381a6e4bc3c.png" group-title="GERC",18:00 22/08 SV Wehen Wiesbaden vs Bayer 04 Leverkusen · RỒNG ĐẤT
+https://pull.niues.live/live/stream-304148_lhd.m3u8?auth_key=1788611402-0-0-e832e751bfb1b57e614147b9f9be0c9a
+#EXTINF:-1 tvg-name="XM Hai Phong FC vs Ninh Binh FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/3de835dd42ad.png" group-title="VIE D1",18:00 05/09 XM Hai Phong FC vs Ninh Binh FC · LOKA
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-620649_lhd.m3u8?auth_key=1787402401-0-0-5da2d6e587f283f1351b4b2032bb765a
-#EXTINF:-1 tvg-name="SV Wehen Wiesbaden vs Bayer 04 Leverkusen" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/2381a6e4bc3c.png" group-title="GERC",18:00 22/08 SV Wehen Wiesbaden vs Bayer 04 Leverkusen · T REX
+https://pull.niues.live/live/stream-9912133_lhd.m3u8?auth_key=1788611402-0-0-3eeb7ca1b75a775b3cf99e9dea34ae92
+#EXTINF:-1 tvg-name="VfL Wolfsburg vs Energie Cottbus" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/a8a8100a9904.png" group-title="GER D2",18:00 05/09 VfL Wolfsburg vs Energie Cottbus · RỒNG ĐẤT
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-619672_lhd.m3u8?txSecret=0a826dbb1ecab7a62e9005cd261f3967&txTime=6a89def1
-#EXTINF:-1 tvg-name="SV Wehen Wiesbaden vs Bayer 04 Leverkusen" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/2381a6e4bc3c.png" group-title="GERC",18:00 22/08 SV Wehen Wiesbaden vs Bayer 04 Leverkusen · CƠM NẾP
+https://pull.niues.live/live/stream-9912123_lhd.m3u8?auth_key=1788611402-0-0-14245ffa3022982802952f837514e578
+#EXTINF:-1 tvg-name="VfL Wolfsburg vs Energie Cottbus" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/a8a8100a9904.png" group-title="GER D2",18:00 05/09 VfL Wolfsburg vs Energie Cottbus · BÚN ĐẬU
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-618950_lhd.m3u8?auth_key=1787402401-0-0-c397fdd6c430c24e7986be4edf469ad4
-#EXTINF:-1 tvg-name="Energie Cottbus vs FC Augsburg" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/8132803ca329.png" group-title="GERC",18:00 22/08 Energie Cottbus vs FC Augsburg · XUÂN TÓC ĐỎ
+https://pull.niues.live/live/stream-619561_lhd.m3u8?auth_key=1788611402-0-0-32fd97b8f4436eb6f60695fc2e5d3f7b
+#EXTINF:-1 tvg-name="FC Seoul vs Incheon United Club" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/40f9180c371c.png" group-title="KOR D1",17:00 05/09 FC Seoul vs Incheon United Club · BLV CHIVAS
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-610518_lhd.m3u8?txSecret=4ff5b20e883f5466181a7bbc57a8c19c&txTime=6a89def1
-#EXTINF:-1 tvg-name="Energie Cottbus vs FC Augsburg" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/8132803ca329.png" group-title="GERC",18:00 22/08 Energie Cottbus vs FC Augsburg · ĐỖ TÚ TÀI
+https://pull.niur.live/live/stream-485739_lhd.m3u8?txSecret=9dfc316ac99d0606de2daa80dbc927ac&txTime=6a9c519a
+#EXTINF:-1 tvg-name="FC Seoul vs Incheon United Club" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/40f9180c371c.png" group-title="KOR D1",17:00 05/09 FC Seoul vs Incheon United Club · BÒ TƯƠI
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-607552_lhd.m3u8?auth_key=1787402401-0-0-3ecbfbbf91a904f65761b6a73c094c79
-#EXTINF:-1 tvg-name="Chengdu Rongcheng vs Shanghai Shenhua" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/8165be9e6645.png" group-title="CHA SL",18:35 22/08 Chengdu Rongcheng vs Shanghai Shenhua · BLV KAN
+https://pull.niur.live/live/stream-620797_lhd.m3u8?txSecret=69cb39345ecb58b6dfc7e98182ebda46&txTime=6a9c519a
+#EXTINF:-1 tvg-name="Holstein Kiel vs 1. FC Nürnberg" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9ad548aaa38a.png" group-title="GER D2",18:00 05/09 Holstein Kiel vs 1. FC Nürnberg · XUÂN TÓC ĐỎ
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-283501_lhd.m3u8?txSecret=03a87f7def9a76faa071d5b7925d5766&txTime=6a89def0
-#EXTINF:-1 tvg-name="Chengdu Rongcheng vs Shanghai Shenhua" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/8165be9e6645.png" group-title="CHA SL",18:35 22/08 Chengdu Rongcheng vs Shanghai Shenhua · BLV VIP
+https://pull.niur.live/live/stream-610518_lhd.m3u8?txSecret=dad3e88088bf6b8179f3874449cfa49e&txTime=6a9c519a
+#EXTINF:-1 tvg-name="Holstein Kiel vs 1. FC Nürnberg" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/9ad548aaa38a.png" group-title="GER D2",18:00 05/09 Holstein Kiel vs 1. FC Nürnberg · ĐỖ TÚ TÀI
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-491873_lhd.m3u8?txSecret=5689bbb9a7b826659faa5c05e68b7dbe&txTime=6a89def0
-#EXTINF:-1 tvg-name="Chengdu Rongcheng vs Shanghai Shenhua" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/8165be9e6645.png" group-title="CHA SL",18:35 22/08 Chengdu Rongcheng vs Shanghai Shenhua · BLV ANH TÀI
+https://pull.niues.live/live/stream-607552_lhd.m3u8?auth_key=1788611402-0-0-fe96c5b424e6a37b91d7b24f24f6e4d5
+#EXTINF:-1 tvg-name="Jeju SK FC vs Ulsan HD FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/27d486453d23.png" group-title="KOR D1",17:00 05/09 Jeju SK FC vs Ulsan HD FC · BLV RÔSI
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-406865_lhd.m3u8?txSecret=9fa6717914e20ed7b83bdda748975a19&txTime=6a89def0
-#EXTINF:-1 tvg-name="Jeonbuk Hyundai Motors vs Ulsan HD FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/4c24dffe81ca.png" group-title="KOR D1",17:30 22/08 Jeonbuk Hyundai Motors vs Ulsan HD FC · BLV RYO
+https://pull.niur.live/live/stream-9912102_lhd.m3u8?txSecret=fc0cec022b113c57e1de5a7da3154ac1&txTime=6a9c519a
+#EXTINF:-1 tvg-name="Jeju SK FC vs Ulsan HD FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/27d486453d23.png" group-title="KOR D1",17:00 05/09 Jeju SK FC vs Ulsan HD FC · MP3
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-602019_lhd.m3u8?txSecret=2f2739894649d9448089f2a1fbf2da18&txTime=6a89def1
-#EXTINF:-1 tvg-name="New Zealand U18 vs China U18" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/ed687a32aad3.png" group-title="FIBA U18",18:00 22/08 New Zealand U18 vs China U18 · KING
+https://pull.niur.live/live/stream-621840_lhd.m3u8?txSecret=3d2e2f29a5c2d4318877f49d42265e78&txTime=6a9c519a
+#EXTINF:-1 tvg-name="1. FC Kaiserslautern vs SV Darmstadt 98" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/f8da7f94a438.png" group-title="GER D2",18:00 05/09 1. FC Kaiserslautern vs SV Darmstadt 98 · VINFAST
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-9912099_lhd.m3u8?auth_key=1787402400-0-0-f65962420c2406ebc9766a40e1dc5848
-#EXTINF:-1 tvg-name="Lincoln City vs Portsmouth" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/330aff3453d6.png" group-title="ENG LCH",18:30 22/08 Lincoln City vs Portsmouth · BLV VOI
+https://pull.niues.live/live/stream-617313_lhd.m3u8?auth_key=1788611402-0-0-ccb3cd70b68f9a3f58bc0b9a56534901
+#EXTINF:-1 tvg-name="1. FC Kaiserslautern vs SV Darmstadt 98" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/f8da7f94a438.png" group-title="GER D2",18:00 05/09 1. FC Kaiserslautern vs SV Darmstadt 98 · BLV ANH TÀI
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-9912114_lhd.m3u8?auth_key=1787402401-0-0-6f95b5f81ec51d0db0187b70eba413b5
-#EXTINF:-1 tvg-name="Lincoln City vs Portsmouth" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/330aff3453d6.png" group-title="ENG LCH",18:30 22/08 Lincoln City vs Portsmouth · BLV NOVA
+https://pull.niur.live/live/stream-406865_lhd.m3u8?txSecret=31b6445fb2d14ff621085175ada6b810&txTime=6a9c519a
+#EXTINF:-1 tvg-name="Jeonbuk Hyundai Motors vs Pohang Steelers" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/b9d3390d6d04.png" group-title="KOR D1",17:00 05/09 Jeonbuk Hyundai Motors vs Pohang Steelers · BOSS
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-619108_lhd.m3u8?auth_key=1787402401-0-0-721ea15f6a02315de8084b9882e3e9e1
-#EXTINF:-1 tvg-name="Shenzhen Peng City vs Zhejiang Professional FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/fa5e7df39962.png" group-title="CHA SL",18:35 22/08 Shenzhen Peng City vs Zhejiang Professional FC · BÒ TƯƠI
+https://pull.niur.live/live/stream-620504_lhd.m3u8?txSecret=161b09f49d827288f4c108b916b1eb2c&txTime=6a9c519a
+#EXTINF:-1 tvg-name="Jeonbuk Hyundai Motors vs Pohang Steelers" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/b9d3390d6d04.png" group-title="KOR D1",17:00 05/09 Jeonbuk Hyundai Motors vs Pohang Steelers · BLV RYO
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-620797_lhd.m3u8?auth_key=1787402401-0-0-e2f85cccd1feab2293be3e9537712850
-#EXTINF:-1 tvg-name="Shenzhen Peng City vs Zhejiang Professional FC" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/fa5e7df39962.png" group-title="CHA SL",18:35 22/08 Shenzhen Peng City vs Zhejiang Professional FC · CURRY
+https://pull.niur.live/live/stream-602019_lhd.m3u8?txSecret=bb2b3040f3df5ed5905ea08c6837f258&txTime=6a9c519a
+#EXTINF:-1 tvg-name="Bucheon FC 1995 vs Daejeon Hana Citizen" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/d48035423938.png" group-title="KOR D1",17:00 05/09 Bucheon FC 1995 vs Daejeon Hana Citizen · BLV CÁO
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-622240_lhd.m3u8?auth_key=1787402401-0-0-260b740f1b2c8d73bfce8e97f075dbcd
-#EXTINF:-1 tvg-name="Beijing Guoan vs Yunnan Yukun" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/b6a92e2bc458.png" group-title="CHA SL",19:00 22/08 Beijing Guoan vs Yunnan Yukun · BLV LION
+https://pull.niues.live/live/stream-597929_lhd.m3u8?auth_key=1788611402-0-0-b398a32c71dab981848c79dbde4257d0
+#EXTINF:-1 tvg-name="Bucheon FC 1995 vs Daejeon Hana Citizen" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/d48035423938.png" group-title="KOR D1",17:00 05/09 Bucheon FC 1995 vs Daejeon Hana Citizen · TUẤN CÙI
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-603255_lhd.m3u8?auth_key=1787402401-0-0-c91d9dfc59839d9a75992f24a5393c22
-#EXTINF:-1 tvg-name="Beijing Guoan vs Yunnan Yukun" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/b6a92e2bc458.png" group-title="CHA SL",19:00 22/08 Beijing Guoan vs Yunnan Yukun · KENCHU
+https://pull.niues.live/live/stream-9912138_lhd.m3u8?auth_key=1788611402-0-0-69d765bca56a1d321f3e092a97c6408a
+#EXTINF:-1 tvg-name="Adelaide 36ers vs Cairns Taipans" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/aa4ba9c72f5f.png" group-title="NBL",17:00 05/09 Adelaide 36ers vs Cairns Taipans · BLV HENRY
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niues.live/live/stream-622602_lhd.m3u8?auth_key=1787402401-0-0-fb629223072f88e0faaf6bfe7860e61f
-#EXTINF:-1 tvg-name="Qingdao West Coast vs Shandong Taishan" tvg-logo="https://phunguyen.github.io/socolive/logos/20260822/34ffb84e017c.png" group-title="CHA SL",19:00 22/08 Qingdao West Coast vs Shandong Taishan · MP3
+https://pull.niues.live/live/stream-9912112_lhd.m3u8?auth_key=1788611402-0-0-0bdc76f2993ed3e7f49e01995eea47bb
+#EXTINF:-1 tvg-name="Shanghai Port vs Beijing Guoan" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/feb4b0492e1e.png" group-title="CHA SL",18:35 05/09 Shanghai Port vs Beijing Guoan · BLV VIP
 #EXTVLCOPT:http-referrer=https://socoliveaus.co/
 #EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
-https://pull.niur.live/live/stream-621840_lhd.m3u8?txSecret=a8334e718e58bdc0ba29fefd70005bab&txTime=6a89def1
+https://pull.niur.live/live/stream-491873_lhd.m3u8?txSecret=34bf634702b987060ac3a003aadb4eeb&txTime=6a9c519a
+#EXTINF:-1 tvg-name="Shanghai Port vs Beijing Guoan" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/feb4b0492e1e.png" group-title="CHA SL",18:35 05/09 Shanghai Port vs Beijing Guoan · GRAP
+#EXTVLCOPT:http-referrer=https://socoliveaus.co/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
+https://pull.niur.live/live/stream-622093_lhd.m3u8?txSecret=4906657c18826be0f2d6d74ffa0764fb&txTime=6a9c519a
+#EXTINF:-1 tvg-name="Shanghai Port vs Beijing Guoan" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/feb4b0492e1e.png" group-title="CHA SL",18:35 05/09 Shanghai Port vs Beijing Guoan · BLV YONE
+#EXTVLCOPT:http-referrer=https://socoliveaus.co/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
+https://pull.niues.live/live/stream-372746_lhd.m3u8?auth_key=1788611402-0-0-03ec0b04fbb14241b5d7e4e738959044
+#EXTINF:-1 tvg-name="Shanghai Port vs Beijing Guoan" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/feb4b0492e1e.png" group-title="CHA SL",18:35 05/09 Shanghai Port vs Beijing Guoan · CƠM NẾP
+#EXTVLCOPT:http-referrer=https://socoliveaus.co/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
+https://pull.niues.live/live/stream-618950_lhd.m3u8?auth_key=1788611402-0-0-3f65cb403e530d2f3e154ae7510abda0
+#EXTINF:-1 tvg-name="Biñan Tatak Gel vs Caloocan Batang Kankaloo" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/d87e6f2d9169.png" group-title="MPBL",18:00 05/09 Biñan Tatak Gel vs Caloocan Batang Kankaloo · CHAN SENA
+#EXTVLCOPT:http-referrer=https://socoliveaus.co/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
+https://pull.niues.live/live/stream-9912115_lhd.m3u8?auth_key=1788611402-0-0-bd57b8adbb4c916fa07837848c39f1bb
+#EXTINF:-1 tvg-name="Shandong Taishan vs Shenzhen Peng City" tvg-logo="https://phunguyen.github.io/socolive/logos/20260905/6e2f32883b2a.png" group-title="CHA SL",19:00 05/09 Shandong Taishan vs Shenzhen Peng City · PEANUT
+#EXTVLCOPT:http-referrer=https://socoliveaus.co/
+#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36
+https://pull.niues.live/live/stream-620084_lhd.m3u8?auth_key=1788611402-0-0-309ba23bd7ed79ae9094b0609c72d3d2
